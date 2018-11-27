@@ -13,3 +13,5 @@ bin/Debug
 /.paket/paket.exe
 /.paket/Paket.Restore.targets
 /Aardvark.log
+/src/Handson.FSharp/bin/Release
+/src/packages/System.ValueTuple.4.4.0
