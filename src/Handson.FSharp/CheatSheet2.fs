@@ -65,3 +65,7 @@ module OrtisExamples =
         if a = v then t
         elif a < v then Node(a, insert v l, r)
         else Node (a, l, insert v r)  
+
+  let doStuff5 =
+    let tree = [0 .. 3 .. 10] |> List.fold (fun v acc -> v |> AttisExamples.insert acc) AttisExamples.BinTree.Empty
+    [0 .. 1 .. 10] |> List.map (fun v -> AttisExamples.exist v tree)
