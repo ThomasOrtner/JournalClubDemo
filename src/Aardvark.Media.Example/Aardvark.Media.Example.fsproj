@@ -14,8 +14,9 @@
     <RunWorkingDirectory>$(OutputPath)\netcoreapp2.0</RunWorkingDirectory>
   </PropertyGroup>
   <ItemGroup>
+	<Compile Include="Boxes.fs" />
 	<Compile Include="Model.fs" />
-	<Compile Include="Model.g.fs" />
+	<Compile Include="NumericControlApp.fs" />
 	<Compile Include="App.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
