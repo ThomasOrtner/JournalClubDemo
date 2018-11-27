@@ -15,4 +15,5 @@ type Model =
     {
         currentModel    : Primitive
         cameraState     : CameraControllerState
+        dockConfig      : DockConfig
     }

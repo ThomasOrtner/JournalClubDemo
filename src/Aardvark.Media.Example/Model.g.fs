@@ -15,9 +15,11 @@ module Mutable =
         let mutable __current : Aardvark.Base.Incremental.IModRef<Aardvark.Media.Example.Model.Model> = Aardvark.Base.Incremental.EqModRef<Aardvark.Media.Example.Model.Model>(__initial) :> Aardvark.Base.Incremental.IModRef<Aardvark.Media.Example.Model.Model>
         let _currentModel = ResetMod.Create(__initial.currentModel)
         let _cameraState = Aardvark.UI.Primitives.Mutable.MCameraControllerState.Create(__initial.cameraState)
+        let _dockConfig = ResetMod.Create(__initial.dockConfig)
         
         member x.currentModel = _currentModel :> IMod<_>
         member x.cameraState = _cameraState
+        member x.dockConfig = _dockConfig :> IMod<_>
         
         member x.Current = __current :> IMod<_>
         member x.Update(v : Aardvark.Media.Example.Model.Model) =
@@ -26,6 +28,7 @@ module Mutable =
                 
                 ResetMod.Update(_currentModel,v.currentModel)
                 Aardvark.UI.Primitives.Mutable.MCameraControllerState.Update(_cameraState, v.cameraState)
+                ResetMod.Update(_dockConfig,v.dockConfig)
                 
         
         static member Create(__initial : Aardvark.Media.Example.Model.Model) : MModel = MModel(__initial)
@@ -53,4 +56,10 @@ module Mutable =
                     override x.Get(r) = r.cameraState
                     override x.Set(r,v) = { r with cameraState = v }
                     override x.Update(r,f) = { r with cameraState = f r.cameraState }
+                }
+            let dockConfig =
+                { new Lens<Aardvark.Media.Example.Model.Model, Aardvark.UI.Primitives.DockConfig>() with
+                    override x.Get(r) = r.dockConfig
+                    override x.Set(r,v) = { r with dockConfig = v }
+                    override x.Update(r,f) = { r with dockConfig = f r.dockConfig }
                 }
