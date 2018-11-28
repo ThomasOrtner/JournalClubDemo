@@ -50,7 +50,6 @@ module OrtisExamples =
     [0 .. 1 .. 10] |> sum2 |> printfn "%A"
     [0 .. 1 .. 10] |> List.fold (fun v acc -> v + acc) 0 |> printfn "%A"
     [0 .. 1 .. 10] |> List.fold (fun v acc -> min v acc) Int32.MaxValue |> printfn "%A"
-
     
   //bintree of a
   type BinaryTree<'a> =
@@ -66,6 +65,14 @@ module OrtisExamples =
         elif a < v then Node(a, insert v l, r)
         else Node (a, l, insert v r)  
 
+  let rec exist (v : 'a) (t : BinaryTree<'a>) = 
+    match t with
+      | Empty -> false
+      | Node(a,l,r) ->
+          if v = a then true
+          elif v < a then exist v l
+          else exist v r
+
   let doStuff5 =
-    let tree = [0 .. 3 .. 10] |> List.fold (fun v acc -> v |> AttisExamples.insert acc) AttisExamples.BinTree.Empty
-    [0 .. 1 .. 10] |> List.map (fun v -> AttisExamples.exist v tree)
+    let tree = [0 .. 3 .. 10] |> List.fold (fun v acc -> v |> insert acc) Empty
+    [0 .. 1 .. 10] |> List.map (fun v -> exist v tree)

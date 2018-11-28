@@ -13,6 +13,7 @@ type Message =
     | CameraMessage of FreeFlyController.Message
     | UpdateConfig of DockConfig
     //add remove boxes
+    //hover box
     //select box
 
 module App =
@@ -21,8 +22,8 @@ module App =
       config {
         content (
             horizontal 10.0 [
-                element { id "render"; title "Render View"; weight 20 }
-                element { id "controls"; title "Controls"; weight 5 }
+                element { id "render"; title "Render View"; weight 10 }
+                element { id "controls"; title "Controls"; weight 4 }
             ]
         )
         appName "JCDemo"
@@ -41,9 +42,7 @@ module App =
         | CameraMessage msg ->
             { m with cameraState = FreeFlyController.update m.cameraState msg }
         | UpdateConfig cfg ->
-            { m with dockConfig = cfg }
-        
-            
+            { m with dockConfig = cfg }                    
 
     let view (m : MModel) =
 
@@ -51,15 +50,21 @@ module App =
             Frustum.perspective 60.0 0.1 100.0 1.0 
                 |> Mod.constant
 
-        let drawBox (box: MVisibleBox) : ISg<Message> =
+        let drawBox (m : MModel) (box: MVisibleBox) : ISg<Message> =
+          let color = CheatSheet.mkColor m box 
+
           Sg.box box.color box.geometry
             |> Sg.shader {
                 do! DefaultSurfaces.trafo
+                do! DefaultSurfaces.vertexColor
                 do! DefaultSurfaces.simpleLighting
             }
 
         let drawBoxes (m : MModel) = 
-          m.boxes |> AList.map drawBox |> AList.toASet |> Sg.set
+          m.boxes 
+            |> AList.map (drawBox m)
+            |> AList.toASet 
+            |> Sg.set
 
         let att = 
           [ 
@@ -76,10 +81,10 @@ module App =
           ]
 
         let showControls = 
-           let guiStyle = style "width: 100%; height:100%; background: transparent; overflow-x: hidden; overflow-y: scroll"
+           let guiStyle = style "width: 100%; background: transparent; overflow-x: hidden; overflow-y: scroll"
            body[guiStyle] [
-             div [clazz "ui segment inverted"][text "add remove box"]
-             div [clazz "ui segment inverted"][text "Make list UI"]
+             Html.SemUi.accordion "Add/Remove" "configure" true [text "add remove box"]
+             Html.SemUi.accordion "Boxes List" "boxes" true [text "box list" ]
            ]
 
         page(fun request -> 
