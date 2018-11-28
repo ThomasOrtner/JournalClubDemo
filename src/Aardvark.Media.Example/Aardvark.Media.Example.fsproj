@@ -16,6 +16,7 @@
   <ItemGroup>
 	<Compile Include="Boxes.fs" />
 	<Compile Include="Model.fs" />
+	<Compile Include="CheatSheet.fs" />
 	<Compile Include="App.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>

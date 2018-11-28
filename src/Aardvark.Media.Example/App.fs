@@ -12,6 +12,8 @@ open Aardvark.Media.Example.Boxes
 type Message =
     | CameraMessage of FreeFlyController.Message
     | UpdateConfig of DockConfig
+    //add remove boxes
+    //select box
 
 module App =
     
@@ -40,6 +42,7 @@ module App =
             { m with cameraState = FreeFlyController.update m.cameraState msg }
         | UpdateConfig cfg ->
             { m with dockConfig = cfg }
+        
             
 
     let view (m : MModel) =
@@ -75,15 +78,15 @@ module App =
         let showControls = 
            let guiStyle = style "width: 100%; height:100%; background: transparent; overflow-x: hidden; overflow-y: scroll"
            body[guiStyle] [
-             text "Where's my UI"
+             div [clazz "ui segment inverted"][text "add remove box"]
+             div [clazz "ui segment inverted"][text "Make list UI"]
            ]
 
         page(fun request -> 
           match Map.tryFind "page" request.queryParams with
             | Some "render" -> 
               require Html.semui (showRenderControl)
-            | Some "controls" -> 
-              
+            | Some "controls" ->               
               require Html.semui (showControls)              
             | Some s ->
               s |> sprintf "invalid page %s"|> failwith
