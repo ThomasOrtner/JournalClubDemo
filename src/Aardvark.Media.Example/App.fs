@@ -69,7 +69,7 @@ module App =
               FreeFlyController.controlledControl m.cameraState CameraMessage frustum (AttributeMap.ofList att) (drawBoxes m)          
               div [style "position: fixed; left: 20px; top: 20px"] [
                   //button [] [text "Toggle Model"]
-              ]          
+                ]          
           ]
 
         let showControls = 
