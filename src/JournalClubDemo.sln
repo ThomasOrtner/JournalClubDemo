@@ -6,7 +6,7 @@ Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Aardvark.Media.Example", "A
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Handson.FSharp", "Handson.FSharp\Handson.FSharp.fsproj", "{C937A373-4EB3-4380-A204-6AC67B124E3D}"
 EndProject
-Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Demo", "Demo\Demo.fsproj", "{299C85CD-9E5E-4FC6-B3C7-63F6419E6BDE}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "NumericControl", "Demo\NumericControl.fsproj", "{299C85CD-9E5E-4FC6-B3C7-63F6419E6BDE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

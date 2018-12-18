@@ -6,29 +6,17 @@ open Aardvark.Base.Incremental
 open Aardvark.UI
 open Aardvark.UI.Primitives
 open Aardvark.Base.Rendering
-open Demo.Model
 
-type NumericModel =
-  {
-    value : float
-  }
-
-type Message = 
+type NumericAction = 
     | DoNothing
 
 module NumericControlApp =        
-
-    let initial = 
-      { 
-        cameraState = FreeFlyController.initial; 
-      }
-
-    let update (m : Model) (msg : Message) =
+    
+    let update (m : NumericModel) (msg : NumericAction) =
         match msg with                                    
             | DoNothing -> m
                 
-    let view (m : MModel) =
-                                                        
+    let view (m : MNumericModel) =
         require Html.semui (
           div [style "position: fixed; left: 20px; top: 20px"] [
               button [onClick (fun _ -> DoNothing)] [text "This button does nothing"]                
@@ -38,7 +26,7 @@ module NumericControlApp =
 
     let app =
         {
-            initial = initial
+            initial = { value = 0.0 }
             update = update
             view = view
             threads = (fun _ -> ThreadPool.Empty)
