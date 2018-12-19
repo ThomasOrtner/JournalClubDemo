@@ -29,6 +29,8 @@ module VectorControlApp =
         div [style "position: fixed; left: 20px; top: 20px"] [
           button [onClick (fun _ -> SetNumeric NumericAction.DoNothing)] [text "Toggle Model"]
           NumericControlApp.view m.x |> UI.map SetNumeric
+          NumericControlApp.view m.x |> UI.map SetNumeric
+          NumericControlApp.view m.x |> UI.map SetNumeric
         ]
       ]
 

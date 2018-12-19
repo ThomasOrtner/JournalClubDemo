@@ -31,7 +31,7 @@ let main args =
 
     WebPart.startServer 4321 [
     //    MutableApp.toWebPart' app.Runtime false (App.start App.app)
-        MutableApp.toWebPart' app.Runtime false (App.start VectorControlApp.app)
+        MutableApp.toWebPart' app.Runtime false (App.start NumericControlApp.app)
     ]
     
     Aardium.run {
